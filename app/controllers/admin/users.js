@@ -11,14 +11,26 @@ module.exports = function (app) {
 };
 
 router.get('/userList', function (req, res, next) {
-    User.find().exec(function (err, users) {
+    console.log(req.query);
+    var pageSize = 10;
+    var currPage = req.query.currPage !=undefined ? req.query.currPage : 1;
+    User.find().exec(function (err,users) {
         if (err) return next(err);
-        res.render('admin/users/userlist', {
-            title: '添加用户信息',
-            pretty: true,
-            users : users
+        var count = users.length;
+        var totalPage = Math.ceil(count / pageSize);
+        User.find().skip((currPage - 1) * pageSize).limit(pageSize).exec(function (err, users) {
+            if (err) return next(err);
+            res.render('admin/users/userlist', {
+                title: '添加用户信息',
+                pretty: true,
+                currPage : currPage,
+                totalPage : totalPage,
+                users : users
+            });
         });
     });
+
+
 });
 router.get('/create', function (req, res, next) {
     res.render('admin/users/users', {

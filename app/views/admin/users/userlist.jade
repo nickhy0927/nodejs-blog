@@ -21,4 +21,20 @@ block content
                 td= user.password
                 td= user.email
                 td= user.createTime
+        tr
+            td(colspan="6",style="text-align:right") 当前页&nbsp;
+                =currPage
+                span /共
+                = totalPage
+                span 页&nbsp;&nbsp;&nbsp;
+                a(href="/admin/users/userList?currPage=1") 首页&nbsp;
+                if currPage != 1
+                    a(href="/admin/users/userList?currPage=" + (currPage - 1) ) 上一页&nbsp;
+                else
+                    a() 上一页&nbsp;
+                if currPage != totalPage
+                    a(href="/admin/users/userList?currPage=" + (currPage + 1)) 下一页&nbsp;
+                else
+                    a(style="") 下一页&nbsp;
+                a(href="/admin/users/userList?currPage=" + totalPage) 尾页
 block selfScript
