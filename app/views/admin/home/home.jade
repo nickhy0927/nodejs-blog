@@ -1,0 +1,35 @@
+//
+   Created by HuangYuan on 2016/4/25.
+extends ../layout
+block content
+    .table-responsive
+        table.table.table-striped.table-responsive.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th Header
+                    th Header
+                    th Header
+                    th Header
+            tbody
+                tr
+                    td 1,001
+                    td Lorem
+                    td ipsum
+                    td dolor
+                    td sit
+                tr
+                    td 1,002
+                    td amet
+                    td consectetur
+                    td adipiscing
+                    td elit
+
+
+block scripts
+    script.
+        var count = 0;
+        function sure() {
+            count++;
+            alert('你点击了' + count + "次");
+        }

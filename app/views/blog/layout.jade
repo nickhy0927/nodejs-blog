@@ -1,0 +1,54 @@
+extends ../layout
+block main
+	.blog-masthead
+		.container
+			nav.blog-nav
+				a.blog-nav-item.active(href='/') 首页
+				a.blog-nav-item(href='#') New features
+				a.blog-nav-item(href='#') Press
+				a.blog-nav-item(href='/contacts') 联系我
+				a.blog-nav-item(href='/about') 关于
+	.container
+		div.header.row
+			.col-sm-8.blog-main
+				block content
+				// /.blog-post
+			// /.blog-main
+			.col-sm-3.col-sm-offset-1.blog-sidebar
+				.sidebar-module.sidebar-module-inset
+					h4 关于
+					p
+						| Etiam porta
+						em sem malesuada magna
+						|  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+				.sidebar-module
+					h4 文章分类
+					ol.list-unstyled
+						li
+							a(href='#') March 2014
+						li
+							a(href='#') February 2014
+				.sidebar-module
+					h4 友情链接
+					ol.list-unstyled
+						li
+							a(href='#') GitHub
+						li
+							a(href='#') Twitter
+						li
+							a(href='#') Facebook
+			// /.blog-sidebar
+		// /.row
+	// /.container
+	footer.blog-footer
+		p @copyright 博客 作者：h_y_12@163.com
+
+block styles
+
+
+block mainScript
+	// IE10 viewport hack for Surface/desktop Windows 8 bug
+	script(src='/js/ie10-viewport-bug-workaround.js')
+	block scripts
+
+

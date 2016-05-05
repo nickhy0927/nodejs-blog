@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width')
+        title= title
+        block css
+            link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap.min.css')
+            link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap-theme.min.css')
+            link(rel='stylesheet', href='/css/ie10-viewport-bug-workaround.css')
+            link(rel='stylesheet', href='/css/style.css')
+            link(rel="icon" href="/img/favicon.ico")
+            block styles
+        block js
+            script(src='/components/jquery/dist/jquery.min.js')
+            script(src='/components/bootstrap/dist/js/bootstrap.min.js')
+            // Just for debugging purposes. Don't actually copy these 2 lines!
+            //if lt IE 9
+                script(src='/js/ie8-responsive-file-warning.js')
+            script(src='/js/ie-emulation-modes-warning.js')
+            // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+            //if lt IE 9
+              script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+              script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+            if ENV_DEVELOPMENT
+              script(src='http://localhost:35729/livereload.js')
+            script.
+                $(function(){
+                    console.log('ready...');
+                });
+            block mainScript
+    body
+        block main

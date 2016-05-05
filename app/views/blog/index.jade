@@ -1,0 +1,31 @@
+//
+   Created by HuangYuan on 2016/4/25.
+
+extends layout
+//
+    添加css
+append css
+    link(rel='stylesheet', href='/css/blog.css')
+block content
+    .blog-post
+        h2.blog-post-title 这是博客的标题
+        p.blog-post-meta
+            | December 23, 2013 by
+            a(href='#') Jacob
+        p
+            | Cum sociis natoque penatibus et magnis
+            a(href='#') dis parturient montes
+            | , nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+        blockquote
+            p
+                | Curabitur blandit tempus porttitor.
+                strong Nullam quis risus eget urna mollis
+                |  ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
+        p
+            | Etiam porta
+            em sem malesuada magna
+            |  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+        p
+            | Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+block scripts
+
