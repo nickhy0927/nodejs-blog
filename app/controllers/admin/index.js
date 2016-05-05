@@ -2,7 +2,6 @@ var express = require('express'),
     router = express.Router();
 
 module.exports = function (app) {
-	console.info("url:",app.locals.urlpath);
     app.use('/admin', router);
 };
 
