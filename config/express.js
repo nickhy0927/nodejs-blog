@@ -7,7 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compress = require('compression');
 var methodOverride = require('method-override');
-var moment = require('moment-format');
+var moment = require('moment');
+var truncate = require('truncate');
 
 
 module.exports = function(app, config) {
@@ -24,6 +25,14 @@ module.exports = function(app, config) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
+
+    app.use(function (req,res,next) {
+        app.locals.pageName = req.path;
+        app.locals.moment = moment;
+        app.locals.truncate = truncate;
+        next();
+    });
+
     app.use(cookieParser());
     app.use(compress());
     app.use(express.static(config.root + '/public'));
@@ -40,15 +49,6 @@ module.exports = function(app, config) {
         next(err);
     });
 
-    // 动态全局变量
-    app.use(function (req, res, next) {
-        res.locals.moment = moment;
-        console.log("url地址");
-        console.log(req);
-        res.locals.urlpath = req.url;
-        next();
-    });
-    
     if(app.get('env') === 'development'){
         app.use(function (err, req, res, next) {
             res.status(err.status || 500);

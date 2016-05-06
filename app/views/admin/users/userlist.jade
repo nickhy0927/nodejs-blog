@@ -3,8 +3,23 @@
 
 extends ../frame
 append css
+    style(type="text/css").
+        .operate {
+            text-align: center;
+        }
+
+        .operate i {
+            padding: 5px;
+        }
+        .alert span {
+            float: right;
+        }
 block content
     div.alert.alert-success 用户信息列表
+        span(style="text-align:right")
+            a(href="/admin/users/create")
+                i.fa.fa-plus &nbsp;
+                | 新增
     table.table.table-bordered.table-striped.table-hover.table-responsive
         tr
             td ID
@@ -13,6 +28,7 @@ block content
             td 登录密码
             td 邮箱
             td 注册时间
+            td 操作
         for user in users
             tr
                 td= user._id
@@ -20,9 +36,14 @@ block content
                 td= user.loginName
                 td= user.password
                 td= user.email
-                td= user.createTime
+                td= moment(user.createTime).format('YYYY-MM-DD')
+                td(class="operate")
+                    a
+                        i.fa.fa-edit.fa-lg
+                    a
+                        i(style="color:red").fa.fa-remove.fa-lg
         tr
-            td(colspan="6",style="text-align:right") 当前页&nbsp;
+            td(colspan="7",style="text-align:right") 当前页&nbsp;
                 =currPage
                 span /共
                 = totalPage

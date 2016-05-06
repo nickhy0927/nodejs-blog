@@ -1,0 +1,65 @@
+//
+   Created by HuangYuan on 2016/4/25.
+
+extends ../frame
+append css
+    style(type="text/css").
+        .btn-toolbars {
+            background: #f2f2f2;
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .Validform_wrong {
+            color: red;
+        }
+        .Validform_right {
+            color: green;
+        }
+        .Validform_checktip {
+            margin-top: 10px;
+        }
+block content
+    .container-fluid
+        form.form-horizontal(action="/admin/category/save",method="post",id="saveForm")
+            div.alert.alert-success
+                =title
+            .form-group
+                label.col-sm-3.control-label(for='title') 分类名称
+                .col-sm-4
+                    input#title.form-control(type='text',datatype="s2-20",nullmsg="名称不能为空",errormsg="名称范围在2~20位之间！",name="title", placeholder='请输入分类名称')
+                .Validform_checktip.col-sm-4
+            .form-group
+                label.col-sm-3.control-label(for='slug') 分类别名
+                .col-sm-4
+                    input#slug.form-control(type='text',datatype="s2-20",nullmsg="别名不能为空",errormsg="别名范围在2~20位之间！",name="slug", placeholder='请输入分类别名')
+                .Validform_checktip.col-sm-4
+            .form-group
+                .col-sm-12.btn-toolbars
+                    button.btn.btn-success(type='submit') 添加
+                    span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    button.btn.btn-default(type='button') 返回
+block selfScript
+    script(src="/components/Validform/Validform.js")
+    script.
+        $(function(){
+            $("#saveForm").Validform({
+                tiptype: 2,
+                showAllError: true,
+                ajaxPost:true,
+                datatype : {
+                    "z2-8" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,8}$/,
+                },
+                callback: function (data) {
+                    if (data.status == 'y') {
+                        alert(data.info);
+                        window.location.href = "/admin/category/categoryList"
+                    } else {
+                        alert(data.info);
+                        return false;
+                    }
+                }
+            })
+        });

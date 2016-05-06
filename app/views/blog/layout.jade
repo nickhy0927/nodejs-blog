@@ -3,11 +3,20 @@ block main
 	.blog-masthead
 		.container
 			nav.blog-nav
-				a.blog-nav-item.active(href='/') 首页
+				if pageName == '/article'
+					a.blog-nav-item.active(href='/') 首页
+				else
+					a.blog-nav-item(href='/') 首页
 				a.blog-nav-item(href='#') New features
 				a.blog-nav-item(href='#') Press
-				a.blog-nav-item(href='/contacts') 联系我
-				a.blog-nav-item(href='/about') 关于
+				if pageName == '/about'
+					a.blog-nav-item.active(href='/about') 关于
+				else
+					a.blog-nav-item(href='/about') 关于
+				if pageName == '/contacts'
+					a.blog-nav-item.active(href='/contacts') 联系我
+				else
+					a.blog-nav-item(href='/contacts') 联系我
 	.container
 		div.header.row
 			.col-sm-8.blog-main
@@ -17,6 +26,7 @@ block main
 			.col-sm-3.col-sm-offset-1.blog-sidebar
 				.sidebar-module.sidebar-module-inset
 					h4 关于
+						= pageName
 					p
 						| Etiam porta
 						em sem malesuada magna

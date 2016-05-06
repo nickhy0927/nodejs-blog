@@ -7,7 +7,9 @@ block styles
         body {
             padding-top: 10px;
         }
-
+        .sidebar{
+            top:39px;
+        }
 block main
     nav.navbar.navbar-inverse.navbar-fixed-top
         .container-fluid
@@ -37,20 +39,20 @@ block main
                         a(href='/admin/users/userList',target="main_frame")
                             i.fa.fa-user &nbsp;用户信息管理
                     li
-                        a(href='#')
+                        a(href='/admin/users/userList',target="main_frame")
                             i.fa.fa-universal-access &nbsp;角色信息管理
                     li
-                        a(href='#')
+                        a(href='/admin/category/categoryList',target="main_frame")
                             i.fa.fa-folder-open &nbsp;文章信息分类
                     li
-                        a(href='#')
+                        a(href='/admin/users/userList',target="main_frame")
                             i.fa.fa-file &nbsp;文章内容管理
                 ul.nav.nav-sidebar
                     li
-                        a(href='')
+                        a(href='/admin/users/userList',target="main_frame")
                             i.fa.fa-lock &nbsp;用户密码修改
             .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
-                iframe(frameborder=0,onLoad="initIFrameEnd();",width="100%",id="main_frame",name="main_frame",src="/admin/users")
+                iframe(frameborder=0,onLoad="initIFrameEnd();",width="100%",id="main_frame",name="main_frame",src="/admin/users/userList")
 block mainScript
     script(type="text/javascript").
         function initIFrame() {
@@ -73,9 +75,19 @@ block mainScript
                 var dHeight = iFrame.contentWindow.document.documentElement.scrollHeight;
                 var height = Math.max(bHeight, dHeight);
                 iFrame.height = height;
-            }catch (err){
+            } catch (err) {
             }
             // 停止定时
             window.clearInterval(timer1);
         }
+
+        $(function () {
+            $(".nav-sidebar").find('li').each(function (index) {
+                var that = $(this);
+                that.on('click', function () {
+                    $(".nav-sidebar").find('li').removeClass('active');
+                    $(this).addClass('active');
+                });
+            });
+        });
     block scripts
