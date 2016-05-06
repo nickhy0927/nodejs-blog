@@ -5,13 +5,14 @@ var mongoose = require('mongoose'),
 
 var ArticleSchema = new Schema({
   	title: String,
-  	url: String,
-  	text: String,
+  	content: String,
+	slug: {type: String, required: true},
+	category: [{type: Schema.Types.ObjectId, ref: 'Category'}],
+	author: [{type: Schema.Types.ObjectId, ref: 'User'}],
+	published: {type: Boolean, default: false},
+	meta: {type: Schema.Types.Mixed},
+	comments: [Schema.Types.Mixed],
   	createTime : {type:Date,default : new Date()}
-});
-
-ArticleSchema.virtual('date').get(function(){
-    return this._id.getTimestamp();
 });
 
 mongoose.model('Article', ArticleSchema);

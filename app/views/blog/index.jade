@@ -7,25 +7,29 @@ extends layout
 append css
     link(rel='stylesheet', href='/css/blog.css')
 block content
-    .blog-post
-        h2.blog-post-title 这是博客的标题
-        p.blog-post-meta
-            | December 23, 2013 by
-            a(href='#') Jacob
-        p
-            | Cum sociis natoque penatibus et magnis
-            a(href='#') dis parturient montes
-            | , nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
-        blockquote
-            p
-                | Curabitur blandit tempus porttitor.
-                strong Nullam quis risus eget urna mollis
-                |  ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
-        p
-            | Etiam porta
-            em sem malesuada magna
-            |  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
-        p
-            | Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+    title= pageTitle
+    h2= title
+    each post in articles
+        div.post
+            h3.post-title
+                a(href="/posts/view/" + post._id,target="_blank")
+                    = post.title
+            div.post-abstract
+                =truncate(post.content, 150)
+            div.post-meta
+                span.post-created 发布时间:&nbsp;
+                    = moment(post.created).format('YYYY-MM-DD')
+                span.post-author 作者:&nbsp;
+                    = post.author[0]['name']
+                span.post-category 分类:&nbsp;
+                    a(href='/posts/categoriy/' + post.category[0].title,target="_blank")
+                        = post.category[0].title
+                span.post-comment 评论:&nbsp;
+                    = post.comments.length || 0
+                span.post-favorite 赞:&nbsp;
+                    a(href="/posts/favorite/" + post._id)
+                        = post.meta.favorite || 0
+                span.post-link
+                    a(href="/posts/view/" + post._id,target="_blank") 查看全文
 block scripts
 

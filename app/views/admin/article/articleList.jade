@@ -15,7 +15,8 @@ append css
             float: right;
         }
 block content
-    div.alert.alert-success 文章分类列表
+    div.alert.alert-success
+        =title
         span(style="text-align:right")
             a(href="/admin/category/create")
                 i.fa.fa-plus &nbsp;
@@ -24,13 +25,18 @@ block content
         tr
             td ID
             td 标题
-            td 别名
+            td 分类
+            td 作者
+            td 发布状态
             td(class="operate") 操作
-        for category in categories
+        for article in articles
             tr
-                td= category._id
-                td= category.title
-                td= category.slug
+                td= article._id
+                td= article.title
+                td= article.slug
+                td= article.category[0].title
+                td= article.author[0].realName
+                td= article.published
                 td(class="operate")
                     a
                         i.fa.fa-edit.fa-lg
@@ -38,9 +44,9 @@ block content
                         i(style="color:red").fa.fa-remove.fa-lg
         tr
             if totalPage == 0
-                td(colspan="4",style="text-align:right") 暂时无数据
+                td(colspan="6",style="text-align:right") 暂时无数据
             else
-                td(colspan="4",style="text-align:right") 当前页&nbsp;
+                td(colspan="6",style="text-align:right") 当前页&nbsp;
                     =currPage
                     span /共
                     = totalPage
