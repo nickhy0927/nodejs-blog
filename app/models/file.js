@@ -9,6 +9,6 @@ var FileSchema = new Schema({
     path: {type: String},
     size: {type: String},
     type: {type: String, required: true},
-    created: {type:Date,default : new Date()}
+    createTime: {type:Date,default : new Date()}
 });
 mongoose.model('File', FileSchema);

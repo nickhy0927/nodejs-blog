@@ -33,6 +33,7 @@ module.exports = function(app, config) {
         app.locals.pageName = req.path;
         app.locals.moment = moment;
         app.locals.truncate = truncate;
+        app.locals.contextPath = config.root + '/public/';
         Category.find().exec(function(err,categories){
             if (err) {return next(err)};
             app.locals.categories = categories;

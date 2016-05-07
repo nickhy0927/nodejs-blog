@@ -1,61 +1,65 @@
 //
-   Created by HuangYuan on 2016/5/5.
+	Created by HuangYuan on 2016/5/5.
 
 extends ../frame
 append css
-    style(type="text/css").
-        .operate {
-            text-align: center;
-        }
+	style(type="text/css").
+		.operate {
+			text-align: center;
+		}
 
-        .operate i {
-            padding: 5px;
-        }
-        .alert span {
-            float: right;
-        }
+		.operate i {
+			padding: 5px;
+		}
+
+		.alert span {
+			float: right;
+		}
 block content
-    div.alert.alert-success 用户信息列表
-        span(style="text-align:right")
-            a(href="/admin/users/create")
-                i.fa.fa-plus &nbsp;
-                | 新增
-    table.table.table-bordered.table-striped.table-hover.table-responsive
-        tr
-            td ID
-            td 用户名称
-            td 登录名称
-            td 登录密码
-            td 邮箱
-            td 注册时间
-            td(class="operate") 操作
-        for user in users
-            tr
-                td= user._id
-                td= user.realName
-                td= user.loginName
-                td= user.password
-                td= user.email
-                td= moment(user.createTime).format('YYYY-MM-DD')
-                td(class="operate")
-                    a
-                        i.fa.fa-edit.fa-lg
-                    a
-                        i(style="color:red").fa.fa-remove.fa-lg
-        tr
-            td(colspan="7",style="text-align:right") 当前页&nbsp;
-                =currPage
-                span /共
-                = totalPage
-                span 页&nbsp;&nbsp;&nbsp;
-                a(href="/admin/users/userList?currPage=1") 首页&nbsp;
-                if currPage != 1
-                    a(href="/admin/users/userList?currPage=" + (currPage - 1) ) 上一页&nbsp;
-                else
-                    a() 上一页&nbsp;
-                if currPage != totalPage
-                    a(href="/admin/users/userList?currPage=" + (currPage + 1)) 下一页&nbsp;
-                else
-                    a(style="") 下一页&nbsp;
-                a(href="/admin/users/userList?currPage=" + totalPage) 尾页
+	div.alert.alert-success 用户信息列表
+		span(style="text-align:right")
+			a(href="/admin/users/create")
+				i.fa.fa-plus &nbsp;
+				| 新增
+	table.table.table-bordered.table-striped.table-hover.table-responsive
+		tr
+			td ID
+			td 用户名称
+			td 登录名称
+			td 登录密码
+			td 邮箱
+			td 注册时间
+			td(class="operate") 操作
+		for user in users
+			tr
+				td= user._id
+				td= user.realName
+				td= user.loginName
+				td= user.password
+				td= user.email
+				td= moment (user.createTime).format ('YYYY-MM-DD')
+				td(class="operate")
+					a
+						i.fa.fa-edit.fa-lg
+					a
+						i(style="color:red").fa.fa-remove.fa-lg
+		tr
+			if totalPage <= 0
+				td(colspan="7",style="text-align:right") 暂时无数据
+			else
+				td(colspan="7",style="text-align:right") 当前页&nbsp;
+					=currPage
+					span /共
+					= totalPage
+					span 页&nbsp;&nbsp;&nbsp;
+					a(href="/admin/users/userList?currPage=1") 首页&nbsp;
+					if currPage != 1
+						a(href="/admin/users/userList?currPage=" + (currPage - 1) ) 上一页&nbsp;
+					else
+						a() 上一页&nbsp;
+					if currPage != totalPage
+						a(href="/admin/users/userList?currPage=" + (currPage + 1)) 下一页&nbsp;
+					else
+						a(style="") 下一页&nbsp;
+					a(href="/admin/users/userList?currPage=" + totalPage) 尾页
 block selfScript

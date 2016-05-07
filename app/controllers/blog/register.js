@@ -1,37 +1,61 @@
 /**
  * Created by HuangYuan on 2016/5/6.
  */
-var express = require('express'),
-    router = express.Router(),
-    mongoose = require('mongoose'),
-    User = mongoose.model('User');
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
-var formidable = require('formidable'),
-    http = require('http'),
-    util = require('util');
+var express = require ('express'),
+	router = express.Router (),
+	mongoose = require ('mongoose'),
+	User = mongoose.model ('User'),
+	File = mongoose.model ('File');
+var multipart = require ('connect-multiparty');
+var multipartMiddleware = multipart ();
+var formidable = require ('formidable'),
+	http = require ('http'),
+	fs = require ('fs'),
+	sys = require ('sys');
+
+var path = "public/files/"
 
 
 module.exports = function (app) {
-    app.use('/blog/users', router);
+	app.use ('/blog/users', router);
 };
 
-router.post('/register', multipartMiddleware, function (req, res, next) {
-    console.log(req.files);
-    //创建表单上传
-    var form = new formidable.IncomingForm();
-    //设置编辑
-    form.encoding = 'utf-8';
-    //设置文件存储路径
-    form.uploadDir = "./public/files/";
-    //保留后缀
-    form.keepExtensions = true;
-    //设置单文件大小限制
-    form.maxFieldsSize = 2 * 1024 * 1024;
-    //form.maxFields = 1000;  设置所以文件的大小总和
-    form.parse(req, function(err, fields, files) {
-        console.log(util.inspect({fields: fields, files: files}));
-    });
-    res.jsonp(req.files);
-});
+router.post ('/register', multipartMiddleware, function (req, res, next) {
+	console.log (req.files);
+	var files = req.files;
+	var name = files.person.name;
+	var size = files.person.size;
+	var type = files.person.type;
+	var oDate = new Date ();
+	var filename = oDate.getFullYear () + ""
+		+ (oDate.getMonth () + 1) + "" + oDate.getDate () + ""
+		+ oDate.getHours () + "" + oDate.getMinutes () + ""
+		+ oDate.getSeconds () + oDate.getMilliseconds();
+	var originalFilename = files.person.originalFilename;
+	var fileExtension = originalFilename.substring (originalFilename.lastIndexOf ('.') + 1);
+	var postJson = req.body;
+	fs.rename (files.person.path, path + filename + "." + fileExtension, function (err) {
+		var file = new File ({
+			name: name,
+			path: "/" + path + filename + "." + fileExtension,
+			size: size,
+			type: type,
+		});
+		user = new User({
+			realName: postJson.realName,
+			loginName: postJson.loginName,
+			password: postJson.password,
+			email: postJson.email,
+			file : file
+		});
+		file.save(file,function (err) {
+			if (err) return next(err);
+			user.save(user,function (err) {
+				if (err) return next(err);
+				res.end('finished upload');
+			})
+		});
+	});
+})
+;
 

@@ -19,7 +19,7 @@ router.get('/categoryList', function (req, res, next) {
         var totalPage = Math.ceil(count / pageSize);
         Category.find().sort({createTime : -1}).skip((currPage - 1) * pageSize).limit(pageSize).exec(function (err, categories) {
             if (err) return next(err);
-            res.render('admin/category/categorylist', {
+            res.render('admin/category/categoryList', {
                 title: '查询文章分类信息',
                 pretty: true,
                 currPage : currPage,

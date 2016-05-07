@@ -6,6 +6,7 @@ var UserSchema = new Schema({
   	loginName: String,
   	password: String,
   	email:String,
+	file: [{type: Schema.Types.ObjectId, ref: 'File'}],
   	lastTime:{type:Date,default : new Date()},
   	createTime : {type:Date,default : new Date()}
 });
