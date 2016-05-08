@@ -13,7 +13,7 @@ var formidable = require('formidable'),
     fs = require('fs'),
     util = require('util');
 
-var path = "public/files/"
+var path = "public/files/";
 
 
 module.exports = function (app) {
@@ -40,7 +40,7 @@ router.post('/register', multipartMiddleware, function (req, res, next) {
         name: name,
         path: "/" + path + filename + "." + fileExtension,
         size: size,
-        type: type,
+        type: type
     });
     user = new User({
         realName: postJson.realName,
