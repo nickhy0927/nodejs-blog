@@ -20,6 +20,10 @@ router.get('/contacts', function (req, res, next) {
         pretty: true
     });
 });
+
+/**
+ * 进入注册页面
+ */
 router.get('/register', function (req, res, next) {
     res.render('blog/register/register', {
         title: '用户注册',
@@ -27,6 +31,14 @@ router.get('/register', function (req, res, next) {
         pretty: true
     });
 });
+
+router.get('/login', function (req, res, next) {
+    res.render('blog/login/login', {
+        title: '用户登录',
+        pretty: true
+    });
+});
+
 router.post('/create', function (req, res, next) {
     res.jsonp(req.body);
 });

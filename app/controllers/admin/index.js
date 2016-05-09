@@ -11,3 +11,10 @@ router.get('/', function (req, res, next) {
         pretty: true
     });
 });
+
+router.get('/login', function (req, res, next) {
+    res.render('admin/login/login', {
+        title: '博客系统管理',
+        pretty: true
+    });
+});

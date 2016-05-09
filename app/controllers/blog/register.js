@@ -33,7 +33,6 @@ router.post ("/login", function (req, res, next) {
 		console.log(user);
 		req.session.user = user;
 		res.redirect("/blog");
-		//res.jsonp(user);
 	});
 });
 
