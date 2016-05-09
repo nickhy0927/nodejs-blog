@@ -41,7 +41,7 @@ module.exports = function (app, config) {
     app.use(function (req, res, next) {
         if (!req.session.user) {
             if (req.url == "/") {
-                res.redirect("/blog")
+                res.redirect("/blog");
             }
             if (req.url == "/login") {
                 next();//如果请求的地址是登录则通过，进行下一个请求

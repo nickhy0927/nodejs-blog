@@ -58,38 +58,10 @@ block main
 
     .container-fluid
         div.header
-            .col-sm-8.blog-main
+            .col-sm-12.blog-main
                 block content
                 // /.blog-post
-            // /.blog-main
-            .col-sm-3.col-sm-offset-1.blog-sidebar
-                .sidebar-module.sidebar-module-inset
-                    h4 关于
-                        = pageName
-                    p
-                        | Etiam porta
-                        em sem malesuada magna
-                        |  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
-                .sidebar-module
-                    h4 文章分类
-                    ol.list-unstyled
-                        if categories != null
-                            for category in categories
-                                li
-                                    a(href='#')
-                                        =category.title
-                .sidebar-module
-                    h4 友情链接
-                    ol.list-unstyled
-                        li
-                            a(href='#') GitHub
-                        li
-                            a(href='#') Twitter
-                        li
-                            a(href='#') Facebook
-            // /.blog-sidebar
-        // /.row
-    // /.container
+    // /.container-fluid
 
     div#myModal(tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true").modal.fade
         div(style="width:380px").modal-dialog

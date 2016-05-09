@@ -43,6 +43,7 @@ h6, .h6 {
     font-size: 1.2em;
     color: #cdddeb;
 }
+
 .blog-nav {
     margin-left: 13%;
     margin-right: 20%;
@@ -169,6 +170,7 @@ h6, .h6 {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
+
 .post {
     margin-bottom: 40px;
 }
@@ -197,32 +199,38 @@ h6, .h6 {
 .post-meta > span:first-of-type {
     margin-left: 0px;
 }
+
 .post-meta > span:last-of-type {
     margin-right: 0px;
     border-right: 0;
 }
+
 .post-view .post-meta {
     border-bottom: 1px dotted #dddddd;
     padding-bottom: 18px;
     margin-bottom: 20px;
     text-align: center;
 }
+
 .post-view .post-content {
     text-indent: 2em;
 }
+
 .page-header {
     text-align: center;
 }
 
-.post-comments,.post-comment-form {
+.post-comments, .post-comment-form {
     margin-top: 40px;
 }
+
 .post-comment-form {
     font-size: 16px;
     font-weight: normal;
 }
+
 .post-comment-form label {
-    font-family : 微软雅黑,宋体,"Courier New";
+    font-family: 微软雅黑, 宋体, "Courier New";
     font-weight: normal;
 }
 
@@ -231,30 +239,36 @@ h6, .h6 {
     margin-bottom: 10px;
     padding: 10px;
 }
-.post-comment-email span{
+
+.post-comment-email span {
     padding-left: 20px;
 }
+
 .post-comment-content {
     text-indent: 3em;
 }
 
 .login-d {
     float: right;
-    margin-right:27px;
+    margin-right: 27px;
 }
+
 .login-d a {
     color: #ffffff;
 }
+
 .login-d a:link {
     cursor: pointer;
     color: #ffffff;
     text-decoration: none;
 }
+
 .login-d a:hover {
     cursor: pointer;
     color: #ffffff;
 }
-.login-d a i{
+
+.login-d a i {
     padding-left: 5px;
 }
 
@@ -265,11 +279,12 @@ h6, .h6 {
     cursor: pointer;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    border-radius:50%;
+    border-radius: 50%;
     border: 1px solid #dedede;
     float: left;
 }
-.user-pic img{
+
+.user-pic img {
     border-radius: 50%;
 }
 
@@ -280,4 +295,54 @@ h6, .h6 {
     font-weight: 500;
     font-size: 1.2em;
     color: #cdddeb;
+}
+
+.dropdown-menu a:link {
+    color: #0f0f0f;
+}
+
+.center-top {
+    border-radius: 5px;
+    border: 1px solid #f2f2f2;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.center-top > .header {
+    background: #f2f2f2;
+    padding-left: 15px;
+    font-size: 1.5em;
+    border-bottom: 1px dotted #00B7FF;
+}
+
+.center-top > .content {
+    font-size: 16px;
+    padding-left: 15px;
+    font-size: 1.5em;
+    padding: 20px;
+}
+
+.center-top > .content >.show-d> img {
+    border-radius: 50%;
+    max-height: 80px;
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+}
+.center-top > .content > .show-d div {
+    padding-left: 10%;
+    width: 100%;
+    font-size: 16px;
+}
+
+.show-d {
+    float: left;
+    width: auto;
+    height: 100px;
+}
+
+.hr-d {
+    width: 100%;
+    height: 1px;
+    border: 1px dotted #00B7FF;
 }
