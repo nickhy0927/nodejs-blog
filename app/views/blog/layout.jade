@@ -1,130 +1,145 @@
 extends ../layout
 append css
-	link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.css')
-	style.
-		#message-tip {
-			color: red;
-			text-align: center;
-			width: 100%;
-		}
+    link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.css')
+    style.
+        #message-tip {
+            color: red;
+            text-align: center;
+            width: 100%;
+        }
 
-		.form-horizontal .form-group {
-			margin-bottom: 0px;
-		}
+        .form-horizontal .form-group {
+            margin-bottom: 0px;
+        }
 block main
-	.blog-masthead
-		.container-fluid
-			nav.blog-nav
-				if pageName == '/'
-					a.blog-nav-item.active(href='/') 首页
-				else
-					a.blog-nav-item(href='/') 首页
-				a.blog-nav-item(href='#') New features
-				a.blog-nav-item(href='#') Press
-				if pageName == '/about'
-					a.blog-nav-item.active(href='/about') 关于
-				else
-					a.blog-nav-item(href='/about') 关于
-				if pageName == '/contacts'
-					a.blog-nav-item.active(href='/contacts') 联系我
-				else
-					a.blog-nav-item(href='/contacts') 联系我
+    .blog-masthead
+        .container-fluid
+            nav.blog-nav
+                if pageName == '/blog'
+                    a.blog-nav-item.active(href='/') 首页
+                else
+                    a.blog-nav-item(href='/blog') 首页
+                a.blog-nav-item(href='#') New features
+                a.blog-nav-item(href='#') Press
+                if pageName == '/blog/about'
+                    a.blog-nav-item.active(href='/blog/about') 关于
+                else
+                    a.blog-nav-item(href='/blog/about') 关于
+                if pageName == '/blog/contacts'
+                    a.blog-nav-item.active(href='/blog/contacts') 联系我
+                else
+                    a.blog-nav-item(href='/blog/contacts') 联系我
 
-				if user != null
-					a.blog-nav-item.login-d
-						= user.realName
-				else
-					a.blog-nav-item.login-d(href='/register')
-						i.fa.fa-user &nbsp;
-							| 注册
-					a.blog-nav-item.login-d(href='#',data-toggle="modal" data-target="#myModal")
-						i.fa.fa-lock &nbsp;
-							| 登录
+            if user != null
+                div.btn-group.login-d
+                    if user.file[0].path == null
+                        i.fa.fa-user &nbsp;&nbsp;
+                    else
+                        div.user-pic
+                            img(src="" + user.file[0].path,style="width:40px;height:40px;")
+                    a.blog-nav-item-login.login-d.dropdown-toggle(href="#",data-toggle="dropdown")
+                        = user.realName
+                        | &nbsp;
+                        i.fa.fa-caret-down
+                    ul(role="menu").dropdown-menu
+                        li
+                            a(href="#") 个人中心
+                        li
+                            a(href="#") 消息中心
+                        li
+                            a(href="#") 退出
+            else
+                a.blog-nav-item-login.login-d(href='/blog/register')
+                    i.fa.fa-user &nbsp;
+                        | 注册
+                a.blog-nav-item-login.login-d(href='#',data-toggle="modal" data-target="#myModal")
+                    i.fa.fa-lock &nbsp;
+                        | 登录
 
-	.container
-		div.header.row
-			.col-sm-8.blog-main
-				block content
-				// /.blog-post
-			// /.blog-main
-			.col-sm-3.col-sm-offset-1.blog-sidebar
-				.sidebar-module.sidebar-module-inset
-					h4 关于
-						= pageName
-					p
-						| Etiam porta
-						em sem malesuada magna
-						|  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
-				.sidebar-module
-					h4 文章分类
-					ol.list-unstyled
-						for category in categories
-							li
-								a(href='#')
-									=category.title
-				.sidebar-module
-					h4 友情链接
-					ol.list-unstyled
-						li
-							a(href='#') GitHub
-						li
-							a(href='#') Twitter
-						li
-							a(href='#') Facebook
-			// /.blog-sidebar
-		// /.row
-	// /.container
+    .container-fluid
+        div.header
+            .col-sm-8.blog-main
+                block content
+                // /.blog-post
+            // /.blog-main
+            .col-sm-3.col-sm-offset-1.blog-sidebar
+                .sidebar-module.sidebar-module-inset
+                    h4 关于
+                        = pageName
+                    p
+                        | Etiam porta
+                        em sem malesuada magna
+                        |  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+                .sidebar-module
+                    h4 文章分类
+                    ol.list-unstyled
+                        for category in categories
+                            li
+                                a(href='#')
+                                    =category.title
+                .sidebar-module
+                    h4 友情链接
+                    ol.list-unstyled
+                        li
+                            a(href='#') GitHub
+                        li
+                            a(href='#') Twitter
+                        li
+                            a(href='#') Facebook
+            // /.blog-sidebar
+        // /.row
+    // /.container
 
-	div#myModal(tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true").modal.fade
-		div(style="width:380px").modal-dialog
-			div(style="width:380px").modal-content
-				.modal-header
-					h4(id="myModalLabel").modal-title 用户登录
-				.modal-body
-					form(role="form",action="/blog/users/login",method="post").form-horizontal
-						div.form-group
-							div.col-sm-8.input-group.col-md-offset-2
-								div.input-group-addon
-									i.fa.fa-user
-								input#loginname(type="text",name="loginname", placeholder="请输入名字").form-control
-							div(style="margin-top:10px;").col-sm-8.input-group.col-md-offset-2
-								div(style="width: 36px").input-group-addon
-									i.fa.fa-lock
-								input#password(type="password",name="password" ,placeholder="请输入密码").form-control
-							div#message-tip(style="margin-top:10px;").col-sm-12.input-group
-						.modal-footer
-							button(type="submit").btn.btn-primary 登录
-							button(type="button",data-dismiss="modal").btn.btn-default 取消
-	footer.blog-footer
-		p 黄园的博客 &nbsp;&nbsp; Email：h_y_12@163.com
+    div#myModal(tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true").modal.fade
+        div(style="width:380px").modal-dialog
+            div(style="width:380px").modal-content
+                .modal-header
+                    h4(id="myModalLabel").modal-title 用户登录
+                .modal-body
+                    form(role="form",action="/blog/users/login",method="post").form-horizontal
+                        div.form-group
+                            div.col-sm-8.input-group.col-md-offset-2
+                                div.input-group-addon
+                                    i.fa.fa-user
+                                input#loginname(type="text",name="loginname", placeholder="请输入名字").form-control
+                            div(style="margin-top:10px;").col-sm-8.input-group.col-md-offset-2
+                                div(style="width: 36px").input-group-addon
+                                    i.fa.fa-lock
+                                input#password(type="password",name="password" ,placeholder="请输入密码").form-control
+                            div#message-tip(style="margin-top:10px;").col-sm-12.input-group
+                        .modal-footer
+                            button(type="submit").btn.btn-primary 登录
+                            button(type="button",data-dismiss="modal").btn.btn-default 取消
+    footer.blog-footer
+        p 黄园的博客 &nbsp;&nbsp; Email：h_y_12@163.com
 
 block styles
 
 
 block mainScript
-	// IE10 viewport hack for Surface/desktop Windows 8 bug
-	script(src='/js/ie10-viewport-bug-workaround.js')
-	script.
-		$ (function () {
-			$ ('#myModal').on ('hide.bs.modal', function () {
-				// 执行一些动作...
-				//alert('1')
-				$ ("#loginname").val ('');
-				$ ("#password").val ('');
-			});
-			changeWin ();
-		});
-		$ (window).resize (function () {
-			changeWin ();
-		});
+    // IE10 viewport hack for Surface/desktop Windows 8 bug
+    script(src='/js/ie10-viewport-bug-workaround.js')
+    script.
+        $(function () {
+            $('#myModal').on('hide.bs.modal', function () {
+                // 执行一些动作...
+                //alert('1')
+                $("#loginname").val('');
+                $("#password").val('');
+            });
+            changeWin();
+        });
+        $(window).resize(function () {
+            changeWin();
+        });
 
-		function changeWin () {
-			$ ('#myModal').css ({
-				'padding-top': function () {
-					return ($ (this).height () / 4);
-				}
-			});
-		}
-	block scripts
+        function changeWin() {
+            $('#myModal').css({
+                'padding-top': function () {
+                    return ($(this).height() / 4);
+                }
+            });
+        }
+    block scripts
 
 

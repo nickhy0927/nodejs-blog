@@ -4,7 +4,7 @@ var express = require('express'),
     Article = mongoose.model('Article');
 
 module.exports = function (app) {
-    app.use('/', router);
+    app.use('/blog', router);
 };
 router.get('/about', function (req, res, next) {
     res.render('blog/index', {
@@ -32,12 +32,15 @@ router.post('/create', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
+    var user = req.session.user;
+    console.log(user);
     Article.find({published:true}).exec(function (err, articles) {
         if (err) return next(err);
         res.render('blog/index', {
             pageTitle: '博客首页',
             title: '所有博客',
             articles: articles,
+            user : user,
             pretty: true
         });
     });

@@ -17,10 +17,10 @@ router.get('/userList', function (req, res, next) {
         if (err) return next(err);
         var count = users.length;
         var totalPage = Math.ceil(count / pageSize);
-        User.find().sort({createTime : -1}).skip((currPage - 1) * pageSize).limit(pageSize).exec(function (err, users) {
+        User.find().populate("file").sort({createTime : -1}).skip((currPage - 1) * pageSize).limit(pageSize).exec(function (err, users) {
             if (err) return next(err);
             res.render('admin/users/userlist', {
-                title: '添加用户信息',
+                title: '用户信息列表',
                 pretty: true,
                 currPage : currPage,
                 totalPage : totalPage,

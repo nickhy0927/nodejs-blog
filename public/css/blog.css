@@ -45,6 +45,8 @@ h6, .h6 {
 }
 .blog-nav {
     margin-left: 13%;
+    margin-right: 20%;
+    float: left;
 }
 
 .blog-nav-item:hover,
@@ -238,10 +240,10 @@ h6, .h6 {
 
 .login-d {
     float: right;
+    margin-right:27px;
 }
 .login-d a {
     color: #ffffff;
-    padding-left: 5px;
 }
 .login-d a:link {
     cursor: pointer;
@@ -254,4 +256,28 @@ h6, .h6 {
 }
 .login-d a i{
     padding-left: 5px;
+}
+
+.user-pic {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    cursor: pointer;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius:50%;
+    border: 1px solid #dedede;
+    float: left;
+}
+.user-pic img{
+    border-radius: 50%;
+}
+
+.blog-nav-item-login {
+    position: relative;
+    display: inline-block;
+    padding: 15px 3px 15px 0px;
+    font-weight: 500;
+    font-size: 1.2em;
+    color: #cdddeb;
 }

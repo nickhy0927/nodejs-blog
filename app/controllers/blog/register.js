@@ -24,23 +24,15 @@ module.exports = function (app) {
  * 登陆
  */
 router.post ("/login", function (req, res, next) {
-	console.log (req.body);
 	var conditions = {
 		loginName: req.body.loginname,
 		password: req.body.password
 	};
-	User.findOne (conditions).exec (function (err, user) {
+	User.findOne (conditions).populate("file").exec (function (err, user) {
 		if (err) return next (err);
-		Article.find({published:true}).exec(function (err, articles) {
-			if (err) return next(err);
-			res.render('blog/index', {
-				pageTitle: '博客首页',
-				title: '所有博客',
-				articles: articles,
-				user: user,
-				pretty: true
-			});
-		});
+		console.log(user);
+		req.session.user = user;
+		res.redirect("/blog");
 		//res.jsonp(user);
 	});
 });
@@ -66,7 +58,7 @@ router.post ('/register', multipartMiddleware, function (req, res, next) {
 	readStream.pipe (writeStream);
 	var file = new File ({
 		name: name,
-		path: "/" + path + filename + "." + fileExtension,
+		path: "/files" + filename + "." + fileExtension,
 		size: size,
 		type: type
 	});
