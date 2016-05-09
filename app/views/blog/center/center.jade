@@ -17,6 +17,13 @@ append css
         .sidebar-module {
             display: none;
         }
+
+        a {
+            color: #000000;
+        }
+        .alert {
+            margin-bottom: 0px;
+        }
 block content
     div.col-xs-12.col-md-12.center-top()
         div.header 个人中心
@@ -35,7 +42,7 @@ block content
                     if user != null
                         = user.email
         hr.hr-d
-        div.content
+        div.content.tab-content
             <!-- Nav tabs -->
             ul.nav.nav-tabs(role="tablist",id="maintab")
                 li.active
@@ -50,15 +57,27 @@ block content
             <!-- Tab panes -->
             div.tab-content
                 div#tab1.tab-pane.active
-                    table#articleList.table.table-hover.table-bordered
+                    div.articleList.alert.alert-success 我的文章
+                        a(href="#")
+                            i.fa.fa-plus &nbsp;
+                            | 新增
+                    table.articleList.table.table-hover.table-bordered
                         tr
+                            td 序号
                             td 标题
                             td 栏目
-                            td 发布状态
-                            td 标题
+                            td 发布人
+                            td 发布时间
+                            td.operate 操作
 
                 div#tab2.tab-pane
-                    | tab2
+                    div.articleList.alert.alert-success 我的相册
+                        a(href="#")
+                            i.fa.fa-plus &nbsp;
+                            | 新增
+                    div.col-md-4.pictures 这是1<br/>这是1
+                    div.col-md-4.pictures 这是2<br/>这是1
+                    div.col-md-4.pictures 这是3<br/>这是1
                 div#tab3.tab-pane
                     | tab3
 block scripts
@@ -67,6 +86,6 @@ block scripts
             $('#maintab a[href="#' + tabId + '"]').tab('show'); // 显示点击的tab页面
             if ($('#' + tabId).html().length < 20) { // 当tab页面内容小于20个字节时ajax加载新页面
                 //$('#' + tabId).html('<br>' + loadimg + ' 页面加载中，请稍后...'); // 设置页面加载时的loading图片
-                //$('#' + tabId).load(url); // ajax加载页面
+                //$('#' + tabId).load("/admin/users/userList"); // ajax加载页面
             }
         }
