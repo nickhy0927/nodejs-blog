@@ -1,6 +1,8 @@
 extends ../center-layout
 append css
 	link(rel='stylesheet', href='/css/blog.css')
+	link(rel='stylesheet', href='/components/webuploader/webuploader.css')
+	link(rel='stylesheet', href='/components/webuploader/style.css')
 	style(type="text/css").
 		.Validform_wrong {
 			color: red;
@@ -42,8 +44,7 @@ block content
 				div.col-xs-7.col-md-7 邮箱：&nbsp;
 					if user != null
 						= user.email
-		hr.hr-d
-		div.content.tab-content
+		div.content.tab-content.tab-content-bars
 			<!-- Nav tabs -->
 			ul.nav.nav-tabs(role="tablist",id="maintab")
 				li.active
@@ -76,11 +77,28 @@ block content
 						a#addPic(href="#")
 							i.fa.fa-plus &nbsp;
 							| 新增
+					div.container-fluid
+						div#uploader.wu-example
+							div.queueList
+								div#dndArea.placeholder
+									div#filePicker
+									p 或将照片拖到这里，单次最多可选300张
+							div.statusBar(style="display:none;")
+								div.progress
+									span.text 0%
+									span.percentage
+								div.info
+								div.btns
+									div#filePicker2
+									div.uploadBtn 开始上传
 					div.col-md-4.pictures 这是1<br/>这是1
 					div.col-md-4.pictures 这是2<br/>这是1
 					div.col-md-4.pictures 这是3<br/>这是1
 				div#tab3.tab-pane
 					| tab3
+	div
+		script(src="/components/webuploader/webuploader.js")
+		script(src="/components/webuploader/upload.js")
 block scripts
 	script.
 		function showPage (tabId, url) {
