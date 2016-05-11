@@ -1,8 +1,7 @@
 extends ../center-layout
 append css
 	link(rel='stylesheet', href='/css/blog.css')
-	link(rel='stylesheet', href='/components/webuploader/webuploader.css')
-	link(rel='stylesheet', href='/components/webuploader/style.css')
+	link(rel='stylesheet', href='/components/upload/control/css/zyUpload.css')
 	style(type="text/css").
 		.Validform_wrong {
 			color: red;
@@ -77,28 +76,17 @@ block content
 						a#addPic(href="#")
 							i.fa.fa-plus &nbsp;
 							| 新增
-					div.container-fluid
-						div#uploader.wu-example
-							div.queueList
-								div#dndArea.placeholder
-									div#filePicker
-									p 或将照片拖到这里，单次最多可选300张
-							div.statusBar(style="display:none;")
-								div.progress
-									span.text 0%
-									span.percentage
-								div.info
-								div.btns
-									div#filePicker2
-									div.uploadBtn 开始上传
+					div.row
+						div#demo.demo.container-fluid
 					div.col-md-4.pictures 这是1<br/>这是1
 					div.col-md-4.pictures 这是2<br/>这是1
 					div.col-md-4.pictures 这是3<br/>这是1
 				div#tab3.tab-pane
 					| tab3
 	div
-		script(src="/components/webuploader/webuploader.js")
-		script(src="/components/webuploader/upload.js")
+		script(src="/components/upload/core/zyFile.js")
+		script(src="/components/upload/control/js/zyUpload.js")
+		script(src="/components/upload/core/jq22.js")
 block scripts
 	script.
 		function showPage (tabId, url) {
@@ -109,9 +97,11 @@ block scripts
 			}
 		}
 		$ (function () {
+			$('.demo').css({display:'none'})
 			$ ("#addPic").click (function () {
 				$ (".pictures").css ({
 					display: 'none'
-				})
+				});
+				$('.demo').css({display:'block'});
 			});
 		});

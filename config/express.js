@@ -38,7 +38,7 @@ module.exports = function (app, config) {
 		secret: 'user'
 	}));
 
-	app.use (function (req, res, next) {
+	/*app.use (function (req, res, next) {
 		if (req.url.indexOf ("components") < 0 || req.url.indexOf('/js') < 0
 			|| req.url.indexOf('/css') < 0 || req.url.indexOf('/img') < 0
 			|| req.url.indexOf('/images') < 0) {
@@ -81,7 +81,7 @@ module.exports = function (app, config) {
 			}
 		} else
 			next();
-	});
+	});*/
 	app.use (function (req, res, next) {
 		app.locals.pageName = req.path;
 		app.locals.moment = moment;
